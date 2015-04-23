@@ -10,6 +10,12 @@ RSpec.describe ScriptUtils do
       expect(ScriptUtils).to receive(:"#{output ? 'system' : '`'}").once.with(cmd)
     end
 
+    context 'when ensure_success is false' do
+      it 'should not raise on nonzero exit code' do
+        run('false', ensure_success: false)
+      end
+    end
+
     context 'when ensure_success is true' do
       context 'when bundle exec is false' do
         context 'when output is true' do

@@ -12,5 +12,12 @@ RSpec.describe ScriptUtils do
         run('ls', output: true)
       end
     end
+
+    context 'when output is false' do
+      it 'should run backticks' do
+        expect(ScriptUtils).to receive(:`).once.with('ls')
+        run('ls', output: false)
+      end
+    end
   end
 end

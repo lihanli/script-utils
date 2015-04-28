@@ -13,4 +13,8 @@ module ScriptUtils
     dir = "#{dir}/*"
     Dir[dir].select { |f| File.file?(f) }
   end
+
+  def file_names(dir)
+    files(dir).map { |f| File.basename(f) }
+  end
 end

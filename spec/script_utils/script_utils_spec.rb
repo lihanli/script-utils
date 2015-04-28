@@ -15,6 +15,12 @@ RSpec.describe ScriptUtils do
     end
   end
 
+  describe '#file_names' do
+    it 'should list the files names' do
+      expect(ScriptUtils.file_names('spec/test_dir')).to eq(['file'])
+    end
+  end
+
   describe '#run' do
     def run(*args)
       ScriptUtils.run(*args)

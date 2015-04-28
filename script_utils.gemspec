@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name = 'script_utils'
-  gem.version = '0.0.2'
+  gem.version = '0.0.3'
   gem.summary = 'script helpers'
   gem.author = 'Lihan Li'
   gem.email = 'frankieteardrop@gmail.com'

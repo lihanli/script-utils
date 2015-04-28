@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe ScriptUtils do
+  describe '#files' do
+    it 'should list the files in a directory' do
+      # binding.pry; raise
+    end
+  end
+
   describe '#run' do
     def run(*args)
       ScriptUtils.run(*args)
@@ -8,6 +14,7 @@ RSpec.describe ScriptUtils do
 
     def expect_command(cmd, output: false)
       expect(ScriptUtils).to receive(:"#{output ? 'system' : '`'}").once.with(cmd)
+      allow($?).to receive(:success?).and_return(true)
     end
 
     context 'when ensure_success is false' do

@@ -7,4 +7,8 @@ module ScriptUtils
     output ? system(cmd) : `#{cmd}`
     raise if ensure_success && !$?.success?
   end
+
+  def files(dir)
+    Dir.entries(dir).select { |f| File.file?(f) }
+  end
 end

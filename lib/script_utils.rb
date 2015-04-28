@@ -9,6 +9,8 @@ module ScriptUtils
   end
 
   def files(dir)
-    Dir.entries(dir).select { |f| File.file?(f) }
+    dir = dir[0...-1] if dir.end_with?('/')
+    dir = "#{dir}/*"
+    Dir[dir].select { |f| File.file?(f) }
   end
 end

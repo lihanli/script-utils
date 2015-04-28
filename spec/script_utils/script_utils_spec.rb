@@ -2,8 +2,16 @@ require 'spec_helper'
 
 RSpec.describe ScriptUtils do
   describe '#files' do
-    it 'should list the files in a directory' do
-      # binding.pry; raise
+    context 'without a trailing slash' do
+      it 'should list the files in a directory' do
+        expect(ScriptUtils.files("spec/test_dir")).to eq(["spec/test_dir/file"])
+      end
+    end
+
+    context 'with a trailing slash' do
+      it 'should list the files in a directory' do
+        expect(ScriptUtils.files("spec/test_dir/")).to eq(["spec/test_dir/file"])
+      end
     end
   end
 

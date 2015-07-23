@@ -8,10 +8,15 @@ module ScriptUtils
     raise if ensure_success && !$?.success?
   end
 
-  def files(dir)
-    dir = dir[0...-1] if dir.end_with?('/')
-    dir = "#{dir}/*"
-    Dir[dir].select { |f| File.file?(f) }
+  %w[files directories].each do |type|
+    define_method(type) do |dir|
+      dir = dir[0...-1] if dir.end_with?('/')
+      dir = "#{dir}/*"
+
+      Dir[dir].find_all do |file_or_dir|
+        File.public_send("#{type == 'files' ? 'file' : 'directory'}?", file_or_dir)
+      end
+    end
   end
 
   def file_names(dir)

@@ -1,23 +1,31 @@
 require 'spec_helper'
 
 RSpec.describe ScriptUtils do
+  let(:test_dir) { 'spec/test_dir' }
+
   describe '#files' do
     context 'without a trailing slash' do
       it 'should list the files in a directory' do
-        expect(ScriptUtils.files("spec/test_dir")).to eq(["spec/test_dir/file"])
+        expect(ScriptUtils.files(test_dir)).to eq(["spec/test_dir/file"])
       end
     end
 
     context 'with a trailing slash' do
       it 'should list the files in a directory' do
-        expect(ScriptUtils.files("spec/test_dir/")).to eq(["spec/test_dir/file"])
+        expect(ScriptUtils.files("#{test_dir}/")).to eq(["spec/test_dir/file"])
       end
+    end
+  end
+
+  describe '#directories' do
+    it 'should list all the directories' do
+      expect(ScriptUtils.directories(test_dir)).to eq(["spec/test_dir/dog"])
     end
   end
 
   describe '#file_names' do
     it 'should list the files names' do
-      expect(ScriptUtils.file_names('spec/test_dir')).to eq(['file'])
+      expect(ScriptUtils.file_names(test_dir)).to eq(['file'])
     end
   end
 

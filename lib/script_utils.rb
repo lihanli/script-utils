@@ -9,17 +9,19 @@ module ScriptUtils
   end
 
   %w[files directories].each do |type|
+    singular = type == 'files' ? 'file' : 'directory'
+
     define_method(type) do |dir|
       dir = dir[0...-1] if dir.end_with?('/')
       dir = "#{dir}/*"
 
       Dir[dir].find_all do |file_or_dir|
-        File.public_send("#{type == 'files' ? 'file' : 'directory'}?", file_or_dir)
+        File.public_send("#{singular}?", file_or_dir)
       end
     end
-  end
 
-  def file_names(dir)
-    files(dir).map { |f| File.basename(f) }
+    define_method("#{singular}_names") do |dir|
+      public_send(type, dir).map { |f| File.basename(f) }
+    end
   end
 end

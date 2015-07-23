@@ -29,6 +29,12 @@ RSpec.describe ScriptUtils do
     end
   end
 
+  describe '#directory_names' do
+    it 'should list the dir names' do
+      expect(ScriptUtils.directory_names(test_dir)).to eq(['dog'])
+    end
+  end
+
   describe '#run' do
     def run(*args)
       ScriptUtils.run(*args)
